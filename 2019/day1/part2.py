@@ -6,7 +6,6 @@ def calculate_fuel_for_mass(mass):
 
 
 def calculate_fuel_for_fuel(fuel_mass):
-    print(fuel_mass)
     new_fuel = calculate_fuel_for_mass(fuel_mass)
     if new_fuel > 0:
         fuel_mass += calculate_fuel_for_fuel(new_fuel)
