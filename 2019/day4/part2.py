@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from collections import defaultdict
+
+
 INPUT_RANGE = '278384-824795'
 RANGE_START, RANGE_END = INPUT_RANGE.split('-')
 
 
 def is_password_valid(password):
-    has_double = False
+    doubles = defaultdict(lambda: False)
+    double_digit = None
     previous = -1
     
     for digit in str(password):
@@ -13,11 +17,15 @@ def is_password_valid(password):
         if previous > digit:
             return False
         elif previous == digit:
-            has_double = True
+            if digit == double_digit:
+                doubles[digit] = False
+            else:
+                double_digit = digit
+                doubles[digit] = True
         previous = digit
-        
-    return has_double
     
+    return any(doubles.values())
+
 
 valid_passwords = set(
     pwd
